@@ -1,0 +1,154 @@
+@import "../styles/fonts";
+@import "../styles/reset";
+@import "../styles/variables";
+body {
+  color: $black;
+  background-color: $greyWhite;
+  font-size: 11px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#popup {
+  min-width: 520px;
+  padding: 20px 20px;
+
+  h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+  }
+
+  .error {
+    color: #a12626;
+    margin-bottom: 10px;
+  }
+
+  .scan-button {
+    background: #1ec7bb;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    margin-bottom: 12px;
+    padding: 5px 8px;
+  }
+
+  .scan-button:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    justify-content: space-around;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 8px;
+
+      .preview {
+        align-items: center;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        flex: 0 0 96px;
+        height: 96px;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .player {
+        height: 88px;
+        width: 88px;
+      }
+
+      .lottie-info {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .lottie-url {
+        color: $black;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+      }
+
+      div.details {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-right: 10px;
+
+        span {
+          color: #666;
+          background: #fff;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+          padding: 2px 5px;
+        }
+
+        .detail {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 3px;
+          justify-content: space-between;
+          border-bottom: 1px dotted #ddd;
+
+          .detail-key {
+            display: inline-flex;
+            color: #999;
+          }
+
+          .detail-value {
+            display: inline-flex;
+            color: #666;
+          }
+        }
+      }
+
+      div.actions {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+      }
+
+      .btn,
+      button {
+        display: inline-flex;
+        border: none;
+        border-radius: 3px;
+        font-size: 10px;
+        padding: 3px 4px;
+        background: #1ec7bb;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 5px;
+        transition: 0.3s;
+        outline: none;
+      }
+
+      .btn:hover,
+      button:hover {
+        background-color: rgba(37, 37, 56, 0.7);
+      }
+
+      .btn:active,
+      button:active {
+        box-shadow: inset 0 3px 4px hsla(0, 0%, 0%, 0.2);
+      }
+    }
+  }
+}

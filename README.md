@@ -1,81 +1,122 @@
-<h1 align="center">Lottie Grabber</h1>
-<h3 align="center">Discover Lottie animations being loaded by a page, view their details and download them.</h3>
-<div align="center">
-  </a>
-  <a href="https://david-dm.org/jawish/webextension-lottie-grabber">
-    <img src="https://img.shields.io/david/jawish/webextension-lottie-grabber.svg?colorB=orange" alt="DEPENDENCIES" />
-  </a>
-  <a href="https://github.com/jawish/webextension-lottie-grabber/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/jawish/webextension-lottie-grabber.svg" alt="LICENSE" />
-  </a>
-</div>
-<hr />
+﻿# canva-animation-extractor
 
-![Screenshot](resources/screenshot1.png?raw=true)
+A lightweight Brave/Chrome extension for finding and downloading Lottie animation JSON files from Canva pages.
 
-## Browser Support
+The extension is built for a simple workflow: open a Canva design, click the extension, scan the current tab, preview the detected animations, then download the animation JSON or copy its URL.
 
-| [![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](/) | [![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](/) | [![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)](/) | [![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](/) | [![Yandex](https://raw.github.com/alrra/browser-logos/master/src/yandex/yandex_48x48.png)](/) | [![Brave](https://raw.github.com/alrra/browser-logos/master/src/brave/brave_48x48.png)](/) | [![vivaldi](https://raw.github.com/alrra/browser-logos/master/src/vivaldi/vivaldi_48x48.png)](/) |
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 49 & later ✔ | 52 & later ✔ | 36 & later ✔ | 79 & later ✔ | Latest ✔ | Latest ✔ | Latest ✔
+## Features
 
-## Documentation
+- Works only on Canva domains.
+- Scans only when you open the popup or click `Scan Canva`.
+- Detects Canva-hosted Lottie JSON files.
+- Validates JSON files before showing them, so unrelated Canva JSON files are ignored.
+- Shows a live preview for each detected animation.
+- Downloads the original Lottie JSON file.
+- Copies the animation URL to your clipboard.
+- Uses a non-persistent background script so it can stay idle when not in use.
 
-- [jawish/webextension-lottie-grabber](https://github.com/jawish/webextension-lottie-grabber)
+## What You Download
+
+The downloaded `.json` file is the actual Lottie animation. Lottie animations are vector-based animation data, not normal image or video files.
+
+You can use the JSON file with:
+
+- LottieFiles Preview or Editor
+- `lottie-web`
+- `dotlottie-player`
+- websites and apps that support Lottie animations
+- conversion tools for exporting to video, GIF, or PNG sequences
+
+## Installation In Brave Or Chrome
+
+1. Build the extension:
+
+```bash
+npm install
+npm run build:chrome
+```
+
+2. Open your browser extensions page:
+
+```text
+brave://extensions
+```
+
+or:
+
+```text
+chrome://extensions
+```
+
+3. Enable `Developer mode`.
+4. Click `Load unpacked`.
+5. Select this folder:
+
+```text
+extension/chrome
+```
+
+## How To Use
+
+1. Open a Canva design page.
+2. Click the `canva-animation-extractor` extension icon.
+3. Click `Scan Canva` if the scan does not start automatically.
+4. Wait a moment while detected JSON files are validated.
+5. Use the preview to identify the animation you want.
+6. Click `Download` or `Copy URL`.
+
+## Notes For PowerPoint
+
+PowerPoint does not use Lottie JSON directly.
+
+For presentations, you usually need to convert the JSON to another format:
+
+- `GIF`: easy to insert, but low quality when scaled.
+- `MP4`: better quality, but no real transparency.
+- `PNG sequence`: best quality and transparency, but harder to use in PowerPoint.
+
+If quality matters, avoid scaling small GIF exports. Convert the Lottie at a high resolution or use a format that matches your slide background.
+
+You can convert downloaded Lottie JSON files to GIF with a transparent background using LottieLab:
+
+- [Lottie to GIF Converter](https://www.lottielab.com/lottie/lottie-to-gif)
+
+Upload the downloaded `.json` file there, choose a transparent background if needed, then export the GIF for use in PowerPoint or other presentation tools.
 
 ## Development
 
-Ensure you have
+Run a development build for Chrome:
 
-- [Node.js](https://nodejs.org) 10 or later installed
-- [Yarn](https://yarnpkg.com) v1 or v2 installed
+```bash
+npm run dev:chrome
+```
 
-Then run the following:
+Create a production Chrome build:
 
-- `yarn install` to install dependencies.
-- `yarn run dev:chrome` to start the development server for chrome extension
-- `yarn run dev:firefox` to start the development server for firefox addon
-- `yarn run dev:opera` to start the development server for opera extension
-- `yarn run build:chrome` to build chrome extension
-- `yarn run build:firefox` to build firefox addon
-- `yarn run build:opera` to build opera extension
-- `yarn run build` builds and packs extensions all at once to extension/ directory
+```bash
+npm run build:chrome
+```
 
-### Steps
+Run checks:
 
-- `yarn install` to install dependencies.
-- To watch file changes in developement
+```bash
+npx tsc --noEmit
+npm run lint
+```
 
-  - Chrome
-    - `yarn run dev:chrome`
-  - Firefox
-    - `yarn run dev:firefox`
-  - Opera
-    - `yarn run dev:opera`
+## Browser Support
 
-- **Load extension in browser**
+This project targets Chromium-based browsers such as Brave and Chrome.
 
-- ### Chrome
+## Limitations
 
-  - Go to the browser address bar and type `chrome://extensions`
-  - Check the `Developer Mode` button to enable it.
-  - Click on the `Load Unpacked Extension…` button.
-  - Select your extension’s extracted directory.
-
-- ### Firefox
-
-  - Load the Add-on via `about:debugging` as temporary Add-on.
-  - Choose the `manifest.json` file in the extracted directory
-
-- ### Opera
-
-  - Load the extension via `opera:extensions`
-  - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
-
-### Production
-
-- `yarn run build` builds the extension for all the browsers to `extension/BROWSER` directory respectively.
+- The extension only scans Canva pages.
+- It downloads Lottie JSON files, not GIF or MP4 files.
+- Some Canva animations may not be exposed as downloadable Lottie files.
+- Some previews may fail if Canva blocks a resource or if the file is not a standard Lottie animation.
 
 ## License
 
-MIT © [Jawish Hameed](http://jawish.org)
+MIT
+
+
